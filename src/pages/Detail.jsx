@@ -66,13 +66,13 @@ export default function Detail() {
   const mainType = pokemon?.types?.[0]?.type?.name;
   const bgColor = mainType ? typeColors[mainType] : null;
 
-  // ✅ BACKGROUND COLOR (HOOK ALWAYS RUNS)
+  // BACKGROUND COLOR
   useEffect(() => {
     if (!bgColor) return;
     document.documentElement.style.setProperty("--identity-primary", bgColor);
   }, [bgColor]);
 
-  // ✅ EARLY RETURN ONLY AFTER ALL HOOKS
+  // EARLY RETURN ONLY AFTER ALL HOOKS
   if (!pokemon || !species) return null;
 
   const description = species.flavor_text_entries
@@ -103,7 +103,7 @@ export default function Detail() {
         </div>
       </header>
 
-      {/* IMAGE + ARROWS */}
+      {/* IMAGE + ARROWS (right & left)*/}
       <div className="featured-img">
         <a
           className={`arrow left-arrow ${pokemon.id === 1 ? "hidden" : ""}`}
@@ -146,6 +146,7 @@ export default function Detail() {
 
         {/* DETAILS */}
         <div className="pokemon-detail-wrapper">
+          {/* Weight */}
           <div className="pokemon-detail-wrap">
             <div className="pokemon-detail">
               <img src={weightIcon} alt="weight" />
@@ -154,6 +155,7 @@ export default function Detail() {
             <p className="caption-fonts">Weight</p>
           </div>
 
+          {/* Height */}
           <div className="pokemon-detail-wrap">
             <div className="pokemon-detail">
               <img src={heightIcon} className="straighten" alt="height" />
@@ -162,6 +164,7 @@ export default function Detail() {
             <p className="caption-fonts">Height</p>
           </div>
 
+          {/* Move */}
           <div className="pokemon-detail-wrap">
             <div className="pokemon-detail move">
               {pokemon.abilities.map(({ ability }) => (
@@ -174,9 +177,10 @@ export default function Detail() {
           </div>
         </div>
 
+        {/* Description */}
         <p className="body3-fonts pokemon-description">{description}</p>
 
-        {/* BASE STATS — EXACT VANILLA */}
+        {/* BASE STATS */}
         <p className="body2-fonts about-text">Base Stats</p>
 
         <div className="stats-wrapper">
@@ -192,7 +196,7 @@ export default function Detail() {
         </div>
       </div>
 
-      {/* BACKGROUND ICON */}
+      {/* BACKGROUND ICON - Pokeball Logo Top*/}
       <img src={pokedexBg} alt="pokedex" className="detail-bg" />
     </main>
   );
