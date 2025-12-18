@@ -55,7 +55,7 @@ export default function Detail() {
       pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   }, [pokemon]);
 
-  //FETCH DATA 
+  //FETCH DATA
   useEffect(() => {
     getPokemonDetail(id).then(({ pokemon, species }) => {
       setPokemon(pokemon);
