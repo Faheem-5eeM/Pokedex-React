@@ -489,8 +489,7 @@ body {
   fill: var(--grayscale-white);
 }
 
-div#not-found-message {
-  display: none;
+#not-found-message {
   position: absolute;
   left: 50%;
   top: 50%;
