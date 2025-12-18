@@ -5,6 +5,8 @@ export const getPokemons = async (limit = 151) => {
   return res.json();
 };
 
+/* Pokemon Stores - Types weight, moves */
+/* Species Stores - Description text */
 export const getPokemonDetail = async (id) => {
   const [pokemon, species] = await Promise.all([
     fetch(`${BASE_URL}/pokemon/${id}`).then((res) => res.json()),
