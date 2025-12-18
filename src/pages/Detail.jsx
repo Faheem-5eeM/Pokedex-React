@@ -42,9 +42,20 @@ const statMap = {
 export default function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
   const [pokemon, setPokemon] = useState(null);
   const [species, setSpecies] = useState(null);
 
+  //Change title for each species
+  useEffect(() => {
+    if (!pokemon) return;
+    document.title =
+      pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  }, [pokemon]);
+
+  // ✅ FETCH DATA (HOOK ALWAYS RUNS)
   useEffect(() => {
     getPokemonDetail(id).then(({ pokemon, species }) => {
       setPokemon(pokemon);
@@ -52,25 +63,24 @@ export default function Detail() {
     });
   }, [id]);
 
-  if (!pokemon || !species) return null;
+  const mainType = pokemon?.types?.[0]?.type?.name;
+  const bgColor = mainType ? typeColors[mainType] : null;
 
-  const mainType = pokemon.types[0].type.name;
-  const bgColor = typeColors[mainType];
-
-  /** SAME AS setTypeBackgroundColor() IN VANILLA */
+  // ✅ BACKGROUND COLOR (HOOK ALWAYS RUNS)
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--identity-primary",
-      bgColor
-    );
+    if (!bgColor) return;
+    document.documentElement.style.setProperty("--identity-primary", bgColor);
   }, [bgColor]);
+
+  // ✅ EARLY RETURN ONLY AFTER ALL HOOKS
+  if (!pokemon || !species) return null;
 
   const description = species.flavor_text_entries
     .find((e) => e.language.name === "en")
     ?.flavor_text.replace(/\f/g, " ");
 
   return (
-    <main className="detail-main main">
+    <main className="detail-main main" style={{ backgroundColor: bgColor }}>
       {/* HEADER */}
       <header className="header">
         <div className="header-wrapper">
@@ -82,7 +92,7 @@ export default function Detail() {
               onClick={() => navigate("/")}
             />
             <div className="name-wrap">
-              <h1 className="name">{pokemon.name}</h1>
+              <h1 className="name">{capitalize(pokemon.name)}</h1>
             </div>
           </div>
           <div className="pokemon-id-wrap">
@@ -172,17 +182,11 @@ export default function Detail() {
         <div className="stats-wrapper">
           {pokemon.stats.map(({ stat, base_stat }) => (
             <div className="stats-wrap" key={stat.name}>
-              <p className="body3-fonts stats">
-                {statMap[stat.name]}
-              </p>
+              <p className="body3-fonts stats">{statMap[stat.name]}</p>
               <p className="body3-fonts">
                 {String(base_stat).padStart(3, "0")}
               </p>
-              <progress
-                className="progress-bar"
-                value={base_stat}
-                max="100"
-              />
+              <progress className="progress-bar" value={base_stat} max="100" />
             </div>
           ))}
         </div>

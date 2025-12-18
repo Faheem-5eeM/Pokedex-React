@@ -1,5 +1,5 @@
 :root {
-  --identity-primary: #F8D030;
+  --identity-primary: #f8d030;
 
   --grayscale-dark: #212121;
   --grayscale-medium: #666666;
@@ -529,4 +529,43 @@ div#not-found-message {
   height: max-content;
   border-color: transparent;
   background-color: transparent;
+}
+
+/* ===== Base Stats Progress Bar ===== */
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Background (GREY PART) */
+.progress-bar::-webkit-progress-bar {
+  background-color: #e0e0e0; /* ← change this */
+  border-radius: 10px;
+}
+
+/* Filled part (GREEN PART) */
+.progress-bar::-webkit-progress-value {
+  background-color: var(--identity-primary);
+  border-radius: 10px;
+}
+
+/* Firefox */
+/* Background (unfilled part) */
+.progress-bar::-webkit-progress-bar {
+  background-color: color-mix(in srgb, var(--identity-primary) 30%, white);
+  border-radius: 10px;
+}
+
+/* Firefox background track */
+.progress-bar {
+  background-color: color-mix(in srgb, var(--identity-primary) 30%, white);
+}
+
+/* Base stat labels (HP, ATK, etc.) */
+.stats-wrap p.stats {
+  color: var(--identity-primary) !important;
 }
