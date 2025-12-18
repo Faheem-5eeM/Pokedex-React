@@ -20,6 +20,10 @@ export default function Home() {
     getPokemons().then((data) => setPokemons(data.results));
   }, []);
 
+  useEffect(() => {
+    document.title = "Pokedex - React";
+  });
+
   const filtered = pokemons.filter((p) => {
     const id = p.url.split("/")[6];
     return filter === "number"

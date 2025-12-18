@@ -45,8 +45,8 @@ export default function Detail() {
 
   const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-  const [pokemon, setPokemon] = useState(null);
-  const [species, setSpecies] = useState(null);
+  const [pokemon, setPokemon] = useState(null); //stores height , weight , types, stats
+  const [species, setSpecies] = useState(null); //stores descriptions
 
   //Change title for each species
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function Detail() {
       pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   }, [pokemon]);
 
-  // ✅ FETCH DATA (HOOK ALWAYS RUNS)
+  //FETCH DATA 
   useEffect(() => {
     getPokemonDetail(id).then(({ pokemon, species }) => {
       setPokemon(pokemon);
