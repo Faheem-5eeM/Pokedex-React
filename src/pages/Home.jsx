@@ -11,7 +11,7 @@ import sortIcon from "../assets/sorting.svg";
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("number");
+  const [filter, setFilter] = useState("name");
   const [showSort, setShowSort] = useState(false);
 
   const navigate = useNavigate();
