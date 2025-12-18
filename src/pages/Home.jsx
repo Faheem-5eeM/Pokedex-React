@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.title = "Pokedex - React";
+    document.title = "Pokédex - React";
   });
 
   const filtered = pokemons.filter((p) => {

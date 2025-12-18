@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container">
         <div className="logo-wrapper">
           <img src={pokeball} alt="pokeball" />
-          <h1>Pokedex</h1>
+          <h1>Pokédex</h1>
         </div>
       </div>
     </header>
